@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html lang="en-us" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="en-us" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="en-us" class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-us"> <!--<![endif]-->
+	<title>Questions Game</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-mobile.css">
+	<link rel="stylesheet" type="text/css" href="css/photoswipe.css" />	
+	
+	<script type="text/javascript" src="js/klass.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="js/code.photoswipe-3.0.5.min.js"></script>	
+
+	<script type="text/javascript">	
+		
+		(function(window, $, PhotoSwipe){			
+			$(document).ready(function(){				
+				$('div.gallery-page')
+					.live('pageshow', function(e){						
+						var 
+							currentPage = $(e.target),
+							
+							options = {
+								'enableKeyboard':false, 
+								'enableMouseWheel': false, 
+								'jQueryMobile' :true, 
+								'loop': false,
+								'preventSlideshow': true
+							},
+							
+							photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));							
+						return true;						
+					})
+					
+					.live('pagehide', function(e){						
+						var 
+							currentPage = $(e.target),
+							photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+
+						if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+							PhotoSwipe.detatch(photoSwipeInstance);
+						}					
+
+						return true;						
+					});				
+			});		
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+	</script>
+	
+	<body>
+		<!-- Home Page: Start -->
+		<div data-role="page" id="Home">
+			<!-- Header: Start -->
+			<div data-role="header" data-position="fixed">
+				<h1>Questions Game</h1>				
+			</div>
+			<!-- Header: End -->
+
+			<!-- Content: Start -->
+			<div data-role="content">
+				<p>Juego de preguntas y respuestas. Te mostraremos varias imágenes, si respondes 
+				bien más de la mitad, ganas un premio!!!</p>
+				<p>Juego de preguntas y respuestas. Te mostraremos varias imágenes, si respondes 
+				bien más de la mitad, ganas un premio!!!</p>
+				<p>Juego de preguntas y respuestas. Te mostraremos varias imágenes, si respondes 
+				bien más de la mitad, ganas un premio!!!</p>
+				<p>Juego de preguntas y respuestas. Te mostraremos varias imágenes, si respondes 
+				bien más de la mitad, ganas un premio!!!</p>
+				<p>Juego de preguntas y respuestas. Te mostraremos varias imágenes, si respondes 
+				bien más de la mitad, ganas un premio!!!</p>
+				<a href="#Gallery1" data-role="button">Jugar</a>
+			</div>
+			<!-- Content: End -->
+
+			<!-- Footer: Start -->
+			<div data-role="footer" data-position="fixed">
+				<h4>Copyrigth 2012</h4>
+			</div>
+			<!-- Footer: End -->
+
+		</div>
+		<!-- Home Page: End -->
+
+		<!-- Gallery Page: Start -->
+		<div date-role="page" id="Gallery1" class="gallery-page" data-add-back-btn="true">
+
+			<!-- Header: Start -->
+			<div data-role="header" data-position="fixed">
+				<h1>Questions Game</h1>				
+			</div>
+			<!-- Header: End -->
+
+			<div data-role="content">	
+		
+				<ul class="gallery">
+				
+					<li><a href="css/images/full/001.jpg" rel="external"><img src="css/images/thumb/001.jpg" alt="Image 001" /></a></li>
+					<li><a href="css/images/full/002.jpg" rel="external"><img src="css/images/thumb/002.jpg" alt="Image 002" /></a></li>
+					<li><a href="css/images/full/003.jpg" rel="external"><img src="css/images/thumb/003.jpg" alt="Image 003" /></a></li>
+					<li><a href="css/images/full/004.jpg" rel="external"><img src="css/images/thumb/004.jpg" alt="Image 004" /></a></li>
+					<li><a href="css/images/full/005.jpg" rel="external"><img src="css/images/thumb/005.jpg" alt="Image 005" /></a></li>
+					<li><a href="css/images/full/006.jpg" rel="external"><img src="css/images/thumb/006.jpg" alt="Image 006" /></a></li>
+					<li><a href="css/images/full/007.jpg" rel="external"><img src="css/images/thumb/007.jpg" alt="Image 007" /></a></li>
+					<li><a href="css/images/full/008.jpg" rel="external"><img src="css/images/thumb/008.jpg" alt="Image 008" /></a></li>
+					<li><a href="css/images/full/009.jpg" rel="external"><img src="css/images/thumb/009.jpg" alt="Image 009" /></a></li>
+					
+				</ul>
+				
+			</div>
+
+			<!-- Footer: Start -->
+			<div data-role="footer" data-position="fixed">
+				<h4>Copyrigth 2012</h4>
+			</div>
+			<!-- Footer: End -->
+
+		</div>
+		<!-- Gallery Page: End -->
+
+	</body>
+</html>
