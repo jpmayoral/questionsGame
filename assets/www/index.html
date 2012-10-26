@@ -19,120 +19,40 @@
 		
 		(function(window, $, PhotoSwipe){			
 			$(document).ready(function(){				
-				var
+				var					
 					options = {
-						preventSlideshow: true
+						preventSlideshow: true,
+						loop: false,
+						captionAndToolbarAutoHideDelay: 0,
+						getImageCaption: function(el){							
+							var captionText, captionEl;
+							
+							// Get the caption from the alt tag
+							if (el.nodeName === "IMG"){
+								captionText = el.getAttribute('alt');								
+							}
+							var i, j, childEl;
+							for (i=0, j=el.childNodes.length; i<j; i++){
+								childEl = el.childNodes[i];
+								if (el.childNodes[i].nodeName === 'IMG'){
+									captionText = childEl.getAttribute('alt'); 										
+								}
+							}
+							
+							// Return a DOM element with custom styling
+							captionEl = document.createElement('div');
+							//captionEl.style.cssText = 'font-weight: bold; padding: 5px;';
+							captionEl.appendChild(document.createTextNode(captionText));
+							return captionEl;														
+						},
+						getToolbar: function(){
+							return '<div class="ps-toolbar-close" style="padding-top: 12px;">Termas de Rio Hondo</div><div class="ps-toolbar-previous" style="padding-top: 12px;">La Banda</div><div class="ps-toolbar-next" style="padding-top: 12px;">Apostoles</div>';
+							// NB. Calling PhotoSwipe.Toolbar.getToolbar() wil return the default toolbar HTML
+						}						
 					},
 					instance = PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), options );
 					
-					instance.show(0);
-
-					// onBeforeShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeShow, function(e){
-						console.log('onBeforeShow');
-					});
-					
-					// onShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onShow, function(e){
-						console.log('onShow');
-					});
-					
-					// onBeforeHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeHide, function(e){
-						console.log('onBeforeHide');
-					});
-					
-					// onHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onHide, function(e){
-						console.log('onHide');
-					});
-					
-					// onDisplayImage
-					instance.addEventHandler(PhotoSwipe.EventTypes.onDisplayImage, function(e){
-						console.log('onDisplayImage{');
-						console.log('onDisplayImage - e.action = ' + e.action);
-						console.log('onDisplayImage - e.index = ' + e.index);
-						console.log(instance.getCurrentImage());
-						console.log('onDisplayImage}');
-					});
-					
-					// onResetPosition
-					instance.addEventHandler(PhotoSwipe.EventTypes.onResetPosition, function(e){
-						console.log('onResetPosition');
-					});
-					
-					// onSlideshowStart
-					instance.addEventHandler(PhotoSwipe.EventTypes.onSlideshowStart, function(e){
-						console.log('onSlideshowStart');
-					});
-					
-					// onSlideshowStop
-					instance.addEventHandler(PhotoSwipe.EventTypes.onSlideshowStop, function(e){
-						console.log('onSlideshowStop');
-					});
-					
-					// onTouch
-					instance.addEventHandler(PhotoSwipe.EventTypes.onTouch, function(e){
-						console.log('onTouch{');
-						console.log('onTouch - e.action = ' + e.action);
-						console.log('onTouch - e.point = ');
-						console.log(e.point);
-						console.log('onTouch}');
-					});
-					
-					// onBeforeCaptionAndToolbarShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarShow, function(e){
-						console.log('onBeforeCaptionAndToolbarShow');
-					});
-					
-					// onCaptionAndToolbarShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onCaptionAndToolbarShow, function(e){
-						console.log('onCaptionAndToolbarShow');
-					});
-					
-					// onBeforeCaptionAndToolbarHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeCaptionAndToolbarHide, function(e){
-						console.log('onBeforeCaptionAndToolbarHide');
-					});
-					
-					// onCaptionAndToolbarHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onCaptionAndToolbarHide, function(e){
-						console.log('onCaptionAndToolbarHide');
-					});
-					
-					// onToolbarTap
-					instance.addEventHandler(PhotoSwipe.EventTypes.onToolbarTap, function(e){
-						console.log('onToolbarTap');
-						console.log(e);
-					});
-					
-					// onBeforeZoomPanRotateShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeZoomPanRotateShow, function(e){
-						console.log('onBeforeZoomPanRotateShow');
-					});
-					
-					// onZoomPanRotateShow
-					instance.addEventHandler(PhotoSwipe.EventTypes.onZoomPanRotateShow, function(e){
-						console.log('onZoomPanRotateShow');
-					});
-					
-					// onBeforeZoomPanRotateHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeZoomPanRotateHide, function(e){
-						console.log('onBeforeZoomPanRotateHide');
-					});
-					
-					// onZoomPanRotateHide
-					instance.addEventHandler(PhotoSwipe.EventTypes.onZoomPanRotateHide, function(e){
-						console.log('onZoomPanRotateHide');
-					});
-					
-					// onZoomPanRotateTransform
-					instance.addEventHandler(PhotoSwipe.EventTypes.onZoomPanRotateTransform, function(e){
-						console.log('onZoomPanRotateTransform');
-						console.log(e);
-					});
-											
-					
+					instance.show(0);					
 				});				
 		}(window, window.jQuery, window.Code.PhotoSwipe));
 		
@@ -141,11 +61,31 @@
 	<body>			
 		<ul id="Gallery" class="gallery" style="display:none";>
 		
-		<li><a href="css/images/full/001.jpg" rel="external"><img src="css/images/thumb/001.jpg" alt="Image 001" /></a></li>
-		<li><a href="css/images/full/002.jpg" rel="external"><img src="css/images/thumb/002.jpg" alt="Image 002" /></a></li>
-		<li><a href="css/images/full/003.jpg" rel="external"><img src="css/images/thumb/003.jpg" alt="Image 003" /></a></li>
-		<li><a href="css/images/full/004.jpg" rel="external"><img src="css/images/thumb/004.jpg" alt="Image 004" /></a></li>
-		<li><a href="css/images/full/005.jpg" rel="external"><img src="css/images/thumb/005.jpg" alt="Image 005" /></a></li>
+		<li>
+			<a href="css/images/full/001.jpg" rel="external">
+				<img src="css/images/thumb/001.jpg" alt="¿En que ciudad de la Argentina, se realizará el 14 de abril de 2012, el gran premio de la Republica argentina de Moto GP?" data-first-answer="Respuesta 1" data-second-answer="Respuesta 2" data-third-answer="Respuesta 3" />
+			</a>
+		</li>
+		<li>
+			<a href="css/images/full/002.jpg" rel="external">
+				<img src="css/images/thumb/002.jpg" alt="¿La cuidad de Termas de Rio Hondo, tiene aeropuerto?" />
+			</a>
+		</li>
+		<li>
+			<a href="css/images/full/003.jpg" rel="external">
+				<img src="css/images/thumb/003.jpg" alt="¿En que mes se realiza todos los años, en la ciudad de Santiago del Estero, la marcha de los bombos?" />
+			</a>
+		</li>
+		<li>
+			<a href="css/images/full/004.jpg" rel="external">
+				<img src="css/images/thumb/004.jpg" alt="¿Santiago del Estero, es la provincia con mayor capacidad hotelera del norte Argentino?" />
+			</a>
+		</li>
+		<li>
+			<a href="css/images/full/005.jpg" rel="external">
+				<img src="css/images/thumb/005.jpg" alt="¿Qué es FORUM?" />
+			</a>
+		</li>
 		
 	</ul>
 	</body>
